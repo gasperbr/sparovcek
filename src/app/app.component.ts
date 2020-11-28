@@ -117,14 +117,12 @@ export class AppComponent {
 
   odjava() {
     this.stranka = {...this.strankaDefault};
-    console.log(this.stranka, this.strankaDefault);
+    this.resetPoloznice();
+    this.nakazilo = {... this.nakaziloDefault};
   }
 
   backToMain() {
     this.stanje = Stanje.GlavnaStran;
-    this.resetPoloznice();
-    this.nakazilo = {... this.nakaziloDefault};
-    this.stranka = {... this.strankaDefault};
     this.showErrors = false;
   }
   

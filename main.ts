@@ -13,10 +13,8 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: size.width,
-    height: size.height,
+    width: 800,
+    height: 900,
     backgroundColor: '#fff8ee',
     webPreferences: {
       nodeIntegration: true,
@@ -25,6 +23,8 @@ function createWindow(): BrowserWindow {
       enableRemoteModule : true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
     },
   });
+
+  win.removeMenu();
 
   if (serve) {
 
