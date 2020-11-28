@@ -1,1 +1,194 @@
-<router-outlet></router-outlet>
+<div class="container">
+    <h1>Banka Šparovček 💰</h1>
+    <div class="main" *ngIf="stanje === Stanje.GlavnaStran">
+        
+        <div class="stranka">
+            <h3 *ngIf="!jePrijavljena()">Trenutno ni prijavljene stranke.</h3>
+            <h3 *ngIf="jePrijavljena()">Prijavljena je stranka: <b>{{stranka.ime + ' ' + stranka.priimek}}</b></h3>
+            <button *ngIf="!jePrijavljena()" (click)="stanje = Stanje.Avtentikacija">Prijava stranke</button>
+            <button *ngIf="jePrijavljena()" (click)="odjava()">Odjava stranke</button>
+        </div>
+
+        <section [class.ne]="!jePrijavljena()" (click)="jePrijavljena() && upn()" class="upn"><h2>Plačilo položnice (UPN)</h2><h2>&#8250;</h2></section>
+        
+        <section [class.ne]="!jePrijavljena()" (click)="jePrijavljena() && goToNakazilo()" class="nakazilo"><h2>Nakazilo</h2><h2>&#8250;</h2></section>
+        
+        <section [class.ne]="!jePrijavljena()" (click)="jePrijavljena() && pregledStanja()" class="stanje"><h2>Pregled stanja</h2><h2>&#8250;</h2></section>
+
+    </div>
+    
+    <div class="prijava sekcija" *ngIf="stanje === Stanje.Avtentikacija">
+        <h2>Prijava stranke</h2>
+        
+        <div class="label-div">
+            <label style="cursor: pointer" for="ime">Ime</label>
+            <label class="err">{{(showErrors && !stranka.ime) ? 'Obvezno polje' : ' '}}</label>
+        </div>
+        <input type="text" name="ime" id="ime" [(ngModel)]="stranka.ime">
+        
+        <div class="label-div">
+            <label style="cursor: pointer" for="priimek">Priimek</label>
+            <label class="err">{{(showErrors && !stranka.priimek) ? 'Obvezno polje' : ' '}}</label>
+        </div>
+        <input type="text" name="priimek" id="priimek" [(ngModel)]="stranka.priimek">
+        
+        <div class="label-div">
+            <label style="cursor: pointer" for="geslo">Geslo</label>
+            <label class="err">{{(showErrors && !stranka.geslo) ? 'Obvezno polje' : ' '}}</label>
+        </div>
+        <input type="text" name="geslo" id="geslo" [(ngModel)]="stranka.geslo">
+        <div class="svg" *ngIf="false">
+            <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><!-- Generator: Sketch 3.0.3 (7891) - http://www.bohemiancoding.com/sketch --><title>icon 22 eye</title><desc>Created with Sketch.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><g id="icon-22-eye" sketch:type="MSArtboardGroup" fill="#000000"><path d="M16,9 C7,9 3,16 3,16 C3,16 7,23.000001 16,23 C25,22.999999 29,16 29,16 C29,16 25,9 16,9 L16,9 L16,9 Z M16,10 C8,10 4.19995117,16 4.19995117,16 C4.19995117,16 8,22.0000006 16,22 C24,21.999999 27.8000488,16 27.8000488,16 C27.8000488,16 24,10 16,10 L16,10 L16,10 Z M16,20 C18.2091391,20 20,18.2091391 20,16 C20,13.7908609 18.2091391,12 16,12 C13.7908609,12 12,13.7908609 12,16 C12,18.2091391 13.7908609,20 16,20 L16,20 L16,20 Z M16,19 C17.6568543,19 19,17.6568543 19,16 C19,14.3431457 17.6568543,13 16,13 C14.3431457,13 13,14.3431457 13,16 C13,17.6568543 14.3431457,19 16,19 L16,19 L16,19 Z M16,17 C16.5522848,17 17,16.5522848 17,16 C17,15.4477152 16.5522848,15 16,15 C15.4477152,15 15,15.4477152 15,16 C15,16.5522848 15.4477152,17 16,17 L16,17 L16,17 Z" id="eye" sketch:type="MSShapeGroup"></path></g></g></svg>    
+            <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><!-- Generator: Sketch 3.0.3 (7891) - http://www.bohemiancoding.com/sketch --><title>icon 21 eye hidden</title><desc>Created with Sketch.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><g id="icon-21-eye-hidden" sketch:type="MSArtboardGroup" fill="#000000"><path d="M8.10869891,20.8913011 C4.61720816,18.8301147 3,16 3,16 C3,16 7,9 16,9 C17.3045107,9 18.5039752,9.14706466 19.6014388,9.39856122 L18.7519017,10.2480983 C17.8971484,10.0900546 16.9800929,10 16,10 C8,10 4.19995117,16 4.19995117,16 C4.19995117,16 5.71472808,18.3917225 8.84492713,20.1550729 L8.10869891,20.8913011 L8.10869891,20.8913011 L8.10869891,20.8913011 Z M12.398561,22.601439 C13.4960246,22.8529356 14.6954892,23.0000001 16,23 C25,22.999999 29,16 29,16 C29,16 27.3827918,13.1698856 23.8913008,11.1086992 L23.1550727,11.8449273 C26.2852719,13.6082776 27.8000488,16 27.8000488,16 C27.8000488,16 24,21.999999 16,22 C15.019907,22.0000001 14.1028515,21.9099455 13.2480981,21.7519019 L12.398561,22.601439 L12.398561,22.601439 L12.398561,22.601439 Z M19.8986531,15.1013469 C19.9649658,15.3902115 20,15.6910144 20,16 C20,18.2091391 18.2091391,20 16,20 C15.6910144,20 15.3902115,19.9649658 15.1013469,19.8986531 L16,19 C16.7677669,19.0000001 17.5355339,18.7071068 18.1213203,18.1213203 C18.7071068,17.5355339 19.0000001,16.7677669 19,16 L19.8986531,15.1013469 L19.8986531,15.1013469 L19.8986531,15.1013469 Z M16.8986531,12.1013469 C16.6097885,12.0350342 16.3089856,12 16,12 C13.7908609,12 12,13.7908609 12,16 C12,16.3089856 12.0350342,16.6097885 12.1013469,16.8986531 L13,16 C12.9999999,15.2322331 13.2928932,14.4644661 13.8786797,13.8786797 C14.4644661,13.2928932 15.2322331,12.9999999 16,13 L16.8986531,12.1013469 L16.8986531,12.1013469 L16.8986531,12.1013469 Z M24,7 L7,24 L8,25 L25,8 L24,7 L24,7 Z" id="eye-hidden" sketch:type="MSShapeGroup"></path></g></g></svg>
+        </div>
+        <div class="buttons">
+            <button (click)="backToMain()">Nazaj</button>
+            <button (click)="prijava()">Prijava</button>
+        </div>
+    </div>
+
+    <div class="prijava sekcija" *ngIf="stanje === Stanje.Upn">
+        <label class="razbremeni-spomin">{{stranka.ime + ' ' + stranka.priimek}}</label>
+        <h2>UPN nalog</h2>
+
+        <div style="display: flex; width: 100%; justify-content: space-between; flex-wrap: wrap;">
+            <div class="col">
+                <div class="label-div">
+                    <label style="cursor: pointer" for="znesek">Znesek (€)</label>
+                    <label class="err">{{(showErrors && !(poloznica.znesek > 0)) ? 'Znesek mora biti večji od 0' : ' '}}</label>
+                </div>
+                <input type="number" min="0" step="0.01" #znesek name="znesek" id="znesek" [(ngModel)]="poloznica.znesek">
+            </div>
+            <div class="col">
+                <div class="label-div">
+                    <label style="cursor: pointer" for="stRacuna1">Št. racuna</label>
+                    <label class="err">{{(showErrors && !poloznica.veljavnaStRacuna()) ? 'Številka računa ni veljavna' : ' '}}</label>
+                </div>
+                <div class="racun">
+                    <input type="text" name="stRacuna1" #stRacuna1 id="stRacuna1" (ngModelChange)="$event.length === 4 ? stRacuna2.focus() : $event" [(ngModel)]="poloznica.stRacuna1">
+                    <input type="text" name="stRacuna2" #stRacuna2 id="stRacuna2" (ngModelChange)="$event.length === 4 ? stRacuna3.focus() : $event" [(ngModel)]="poloznica.stRacuna2">
+                    <input type="text" name="stRacuna4" #stRacuna3 id="stRacuna3" (ngModelChange)="$event.length === 4 ? stRacuna4.focus() : $event" [(ngModel)]="poloznica.stRacuna3">
+                    <input type="text" name="stRacuna4" #stRacuna4 id="stRacuna4" (ngModelChange)="$event.length === 3 ? referenca1.focus() : $event" [(ngModel)]="poloznica.stRacuna4">
+                </div>
+            </div>
+        </div>
+
+        <div class="label-div">
+            <label style="cursor: pointer" for="referenca1">Referenca</label>
+            <label class="err">{{(showErrors && !poloznica.veljavnaReferenca()) ? 'Referenca ni veljavna' : ' '}}</label>
+        </div>
+        <div class="racun">
+            <input type="text" name="referenca1" id="referenca1" #referenca1 (ngModelChange)="$event.length === 4 ? referenca2.focus() : $event" [(ngModel)]="poloznica.referenca1">
+            <input style="width: 210px" type="text" name="referenca2" #referenca2 [(ngModel)]="poloznica.referenca2">
+        </div>
+
+        <div class="label-div">
+            <label style="cursor: pointer" for="naziv">Naziv</label>
+            <label class="err">{{(showErrors && !poloznica.naziv) ? 'Obvezno polje' : ' '}}</label>
+        </div>
+        <input type="text" name="naziv" id="naziv" [(ngModel)]="poloznica.naziv">
+
+        <div class="label-div">
+            <label style="cursor: pointer" for="naslov">Naslov</label>
+            <label class="err">{{(showErrors && !poloznica.naslov) ? 'Obvezno polje' : ' '}}</label>
+        </div>
+        <input type="text" name="naslov" id="naslov" [(ngModel)]="poloznica.naslov">
+
+        <div class="label-div">
+            <label style="cursor: pointer" for="osebniZaznamek">Osebni zaznamek</label>
+            <label class="err">{{(showErrors && !poloznica.osebniZaznamek) ? 'Obvezno polje' : ' '}}</label>
+        </div>
+        <input type="text" name="osebniZaznamek" id="osebniZaznamek" [(ngModel)]="poloznica.osebniZaznamek">
+
+
+        <div class="buttons">
+            <button (click)="backToMain()">Nazaj</button>
+            <button (click)="resetPoloznice()">Ponastavi polja</button>
+            <button (click)="payUPN()">Plačilo</button>
+        </div>
+
+        <label style="margin-left: auto;margin-top: 1.6rem;" *ngIf="placiloIzvedeno">Plačilo je bilo uspešno izvedeno ✔️</label>
+    </div>
+
+    <div class="prijava sekcija" *ngIf="stanje === Stanje.Nakazilo">
+        <label class="razbremeni-spomin">{{stranka.ime + ' ' + stranka.priimek}}</label>
+        <h2>Nakazilo</h2>
+
+        <label>Hitra nakazila</label>
+        <select [ngModel]="selectedNakazilo" (ngModelChange)="setSomeNakazilo($event)" name="sel2">
+            <option [value]="undefined"></option>
+            <option *ngFor="let nameN of hitraNakazilaArr; let i = index" [value]="i">{{nameN}}</option>
+        </select>
+
+        <div style="display: flex; width: 100%; justify-content: space-between; flex-wrap: wrap;">
+            <div class="col">
+                <div class="label-div">
+                    <label style="cursor: pointer" for="znesek">Znesek (€)</label>
+                    <label class="err">{{(showErrors && !(nakazilo.znesek > 0)) ? 'Znesek mora biti večji od 0' : ' '}}</label>
+                </div>
+                <input type="number" min="0" step="0.01" #znesek name="znesek" id="znesek" [(ngModel)]="nakazilo.znesek">
+            </div>
+            <div class="col">
+                <div class="label-div">
+                    <label style="cursor: pointer" for="stRacuna1N">Št. racuna</label>
+                    <label class="err">{{(showErrors && !nakazilo.veljavnaStRacuna()) ? 'Številka računa ni veljavna' : ' '}}</label>
+                </div>
+                <div class="racun">
+                    <input type="text" name="stRacuna1N" #stRacuna1N id="stRacuna1N" (ngModelChange)="$event.length === 4 ? stRacuna2N.focus() : $event" [(ngModel)]="nakazilo.stRacuna1">
+                    <input type="text" name="stRacuna2N" #stRacuna2N id="stRacuna2N" (ngModelChange)="$event.length === 4 ? stRacuna3N.focus() : $event" [(ngModel)]="nakazilo.stRacuna2">
+                    <input type="text" name="stRacuna4" #stRacuna3N id="stRacuna3N" (ngModelChange)="$event.length === 4 ? stRacuna4N.focus() : $event" [(ngModel)]="nakazilo.stRacuna3">
+                    <input type="text" name="stRacuna4N" #stRacuna4N id="stRacuna4N" (ngModelChange)="$event.length === 3 ? $event : $event" [(ngModel)]="nakazilo.stRacuna4">
+                </div>
+            </div>
+        </div>
+
+        <div class="label-div">
+            <label for="hitroNakazilo">Shrani hitro nakazilo?</label>
+        </div>
+        <input style="width: 24px" type="checkbox" name="hitroNakazilo" id="hitroNakazilo" [(ngModel)]="nakazilo.hitroNakazilo">
+
+        <div *ngIf="nakazilo.hitroNakazilo">
+            <div class="label-div">
+                <label style="cursor: pointer" for="imeNakazila">Ime nakazila</label>
+                <label class="err">{{(showErrors && nakazilo.hitroNakazilo && !nakazilo.imeNakazila) ? 'Obvezno polje' : ' '}}</label>
+            </div>
+            <input type="text" name="imeNakazila" id="imeNakazila" [(ngModel)]="nakazilo.imeNakazila">
+        </div>
+
+        <div class="buttons">
+            <button (click)="backToMain()">Nazaj</button>
+            <button (click)="resetNakazila()">Ponastavi polja</button>
+            <button (click)="placajNakazilo()">Plačilo</button>
+        </div>
+
+        <label style="margin-left: auto;margin-top: 1.6rem;" *ngIf="placiloIzvedeno">Plačilo je bilo uspešno izvedeno ✔️</label>
+
+    </div>
+    
+    <div class="prijava sekcija" *ngIf="stanje === Stanje.Stanje">
+        <label class="razbremeni-spomin">{{stranka.ime + ' ' + stranka.priimek}}</label>
+        <h2>Pregled Stanja</h2>
+
+        <div class="stanje-rac">
+            <h3>Domači račun: </h3><h3>12,45 € (262,45€ razpoložjivih sredstev)</h3>
+        </div>
+
+        <div class="stanje-rac">
+            <h3>Službeni račun: </h3><h3>1.000,01 €</h3>
+        </div>
+
+        <div class="stanje-rac">
+            <h3>neobdavčenen račun: </h3><h3>250.000,00 €</h3>
+        </div>
+
+        <div class="buttons">
+            <button (click)="backToMain()">Nazaj</button>
+        </div>
+    </div>
+
+    <div class="zgodovina" *ngIf="stanje === Stanje.GlavnaStran">
+        <label>Zgodovina</label>
+        <h3 *ngFor="let item of zgodovina; let i = index">{{i + 1}}. {{item}}</h3>
+    </div>
+
+</div>
