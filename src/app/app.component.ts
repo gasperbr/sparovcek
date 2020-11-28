@@ -119,6 +119,7 @@ export class AppComponent {
     this.stranka = {...this.strankaDefault};
     this.resetPoloznice();
     this.nakazilo = {... this.nakaziloDefault};
+    this.zgodovina = [];
   }
 
   backToMain() {
