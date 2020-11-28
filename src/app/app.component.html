@@ -65,10 +65,10 @@
                     <label class="err">{{(showErrors && !poloznica.veljavnaStRacuna()) ? 'Številka računa ni veljavna' : ' '}}</label>
                 </div>
                 <div class="racun">
-                    <input type="text" name="stRacuna1" #stRacuna1 id="stRacuna1" (ngModelChange)="$event.length === 4 ? stRacuna2.focus() : $event" [(ngModel)]="poloznica.stRacuna1">
-                    <input type="text" name="stRacuna2" #stRacuna2 id="stRacuna2" (ngModelChange)="$event.length === 4 ? stRacuna3.focus() : $event" [(ngModel)]="poloznica.stRacuna2">
-                    <input type="text" name="stRacuna4" #stRacuna3 id="stRacuna3" (ngModelChange)="$event.length === 4 ? stRacuna4.focus() : $event" [(ngModel)]="poloznica.stRacuna3">
-                    <input type="text" name="stRacuna4" #stRacuna4 id="stRacuna4" (ngModelChange)="$event.length === 3 ? referenca1.focus() : $event" [(ngModel)]="poloznica.stRacuna4">
+                    <input type="text" name="stRacuna1" #stRacuna1 id="stRacuna1" maxlength="4" (ngModelChange)="$event.length === 4 ? stRacuna2.focus() : $event" [(ngModel)]="poloznica.stRacuna1">
+                    <input type="text" name="stRacuna2" #stRacuna2 id="stRacuna2" maxlength="4" (ngModelChange)="$event.length === 4 ? (poloznica.stRacuna2 = $event.substr(0,4) && stRacuna3.focus()) : $event" [(ngModel)]="poloznica.stRacuna2">
+                    <input type="text" name="stRacuna4" #stRacuna3 id="stRacuna3" maxlength="4" (ngModelChange)="$event.length === 4 ? (poloznica.stRacuna3 = $event.substr(0,4) && stRacuna4.focus()) : $event" [(ngModel)]="poloznica.stRacuna3">
+                    <input type="text" name="stRacuna4" #stRacuna4 id="stRacuna4" maxlength="3" (ngModelChange)="$event.length === 3 ? (poloznica.stRacuna4 = $event.substr(0,3) && referenca1.focus()) : $event" [(ngModel)]="poloznica.stRacuna4">
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
             <label class="err">{{(showErrors && !poloznica.veljavnaReferenca()) ? 'Referenca ni veljavna' : ' '}}</label>
         </div>
         <div class="racun">
-            <input type="text" name="referenca1" id="referenca1" #referenca1 (ngModelChange)="$event.length === 4 ? referenca2.focus() : $event" [(ngModel)]="poloznica.referenca1">
+            <input type="text" name="referenca1" id="referenca1" maxlength="4" #referenca1 (ngModelChange)="$event.length === 4 ? referenca2.focus() : $event" [(ngModel)]="poloznica.referenca1">
             <input style="width: 210px" type="text" name="referenca2" #referenca2 [(ngModel)]="poloznica.referenca2">
         </div>
 
@@ -134,10 +134,10 @@
                     <label class="err">{{(showErrors && !nakazilo.veljavnaStRacuna()) ? 'Številka računa ni veljavna' : ' '}}</label>
                 </div>
                 <div class="racun">
-                    <input type="text" name="stRacuna1N" #stRacuna1N id="stRacuna1N" (ngModelChange)="$event.length === 4 ? stRacuna2N.focus() : $event" [(ngModel)]="nakazilo.stRacuna1">
-                    <input type="text" name="stRacuna2N" #stRacuna2N id="stRacuna2N" (ngModelChange)="$event.length === 4 ? stRacuna3N.focus() : $event" [(ngModel)]="nakazilo.stRacuna2">
-                    <input type="text" name="stRacuna4" #stRacuna3N id="stRacuna3N" (ngModelChange)="$event.length === 4 ? stRacuna4N.focus() : $event" [(ngModel)]="nakazilo.stRacuna3">
-                    <input type="text" name="stRacuna4N" #stRacuna4N id="stRacuna4N" (ngModelChange)="$event.length === 3 ? $event : $event" [(ngModel)]="nakazilo.stRacuna4">
+                    <input type="text" name="stRacuna1N" #stRacuna1N maxlength="4" id="stRacuna1N" (ngModelChange)="$event.length === 4 ? stRacuna2N.focus() : $event" [(ngModel)]="nakazilo.stRacuna1">
+                    <input type="text" name="stRacuna2N" #stRacuna2N maxlength="4" id="stRacuna2N" (ngModelChange)="$event.length === 4 ? stRacuna3N.focus() : $event" [(ngModel)]="nakazilo.stRacuna2">
+                    <input type="text" name="stRacuna3N" #stRacuna3N maxlength="4" id="stRacuna3N" (ngModelChange)="$event.length === 4 ? stRacuna4N.focus() : $event" [(ngModel)]="nakazilo.stRacuna3">
+                    <input type="text" name="stRacuna4N" #stRacuna4N maxlength="3" id="stRacuna4N" (ngModelChange)="$event.length === 3 ? $event : $event" [(ngModel)]="nakazilo.stRacuna4">
                 </div>
             </div>
         </div>
